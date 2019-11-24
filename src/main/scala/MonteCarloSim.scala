@@ -20,19 +20,21 @@ object MonteCarloSim {
 
   // main driver method that runs Spark application
   def main(args: Array[String]): Unit = {
-    val aws = if (args.length > 0 && args.head.equals("aws")) true else false       // check for aws argument
+    val aws    = if (args.length > 0) true      else false                          // check for aws argument
+    val bucket = if (args.length > 0) args.head else ""                             // name of s3 bucket
 
     // retrieve input data and output paths
-    val portfolioPath = if (aws) conf.getString("spark.portfolio_path_aws")
-                        else     conf.getString("spark.portfolio_path")
-    val dataPath      = if (aws) conf.getString("spark.data_path_aws")
-                        else     conf.getString("spark.data_path")
-    val output        = if (aws) conf.getString("spark.output_path_aws")
-                        else     conf.getString("spark.output_path")
+    val s3            = conf.getString("spark.aws_prefix")
+    val portfolioPath = if (aws) s3 + bucket + conf.getString("spark.portfolio_path_aws")
+                        else                   conf.getString("spark.portfolio_path")
+    val dataPath      = if (aws) s3 + bucket + conf.getString("spark.data_path_aws")
+                        else                   conf.getString("spark.data_path")
+    val output        = if (aws)               conf.getString("spark.output_path_aws")
+                        else                   conf.getString("spark.output_path")
     val outputPath    =          new Path(output)
-    val srcPath       = if (aws) new Path(conf.getString("spark.output_src_path_aws"))
+    val srcPath       = if (aws) new Path(conf.getString(s3 + bucket + "spark.output_src_path_aws"))
                         else     new Path(conf.getString("spark.output_src_path"))
-    val destPath      = if (aws) new Path(conf.getString("spark.output_dest_path_aws"))
+    val destPath      = if (aws) new Path(conf.getString(s3 + bucket + "spark.output_dest_path_aws"))
                         else     new Path(conf.getString("spark.output_dest_path"))
 
     // set spark application name and, if not running on aws, set to run locally with multiple cores

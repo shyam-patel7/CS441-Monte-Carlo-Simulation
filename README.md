@@ -9,15 +9,13 @@ This project utilizes the open-source [Apache Spark 2.4.4](https://spark.apache.
 
 
 ## Running
-To successfully run this project, access to [Amazon EMR](https://aws.amazon.com/emr), or the [Hortonworks Data Platform (HDP)](https://www.cloudera.com/downloads/hortonworks-sandbox.html) on Sandbox with Apache Hadoop with [VMware](https://my.vmware.com/en/web/vmware/downloads) virtualization software, [IntelliJ IDEA](https://www.jetbrains.com/idea), [sbt](https://docs.scala-lang.org/getting-started/sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html) and [Java 8 JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (version 1.8 or higher) are required.
+To successfully run this project, access to the [Amazon EMR](https://aws.amazon.com/emr) cloud data platform, [IntelliJ IDEA](https://www.jetbrains.com/idea), [sbt](https://docs.scala-lang.org/getting-started/sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html) and [Java 8 JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (version 1.8 or higher) are required.
 
 1. From the project root directory, enter the following Terminal command to run all tests and assemble the JAR:
 
         sbt clean assembly
 
-2. Start the HDP sandbox. Then, enter the following command in Terminal to transfer the JAR into the home directory.
-
-        scp -P 2222 target/scala-2.13/Shyam_Patel_hw2-assembly-0.1.jar maria_dev@sandbox-hdp.hoziprtonworks.com:~/
+2. Upload the JAR to the [Amazon S3](https://docs.aws.amazon.com/s3) bucket.
 
 3. SSH into the HDP sandbox.
 

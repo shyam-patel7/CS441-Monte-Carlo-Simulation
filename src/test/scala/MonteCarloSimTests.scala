@@ -21,30 +21,25 @@ class MonteCarloSimTests extends FlatSpec with Matchers {
     load.getString("spark.portfolio_path") should be ("src/main/resources/portfolio.csv")
   }
   it should "specify AWS path for portfolio data" in {
-    load.getString("spark.portfolio_path_aws") should startWith ("s3n://")
-    load.getString("spark.portfolio_path_aws") should endWith ("/portfolio.csv")
+    load.getString("spark.portfolio_path_aws") should be ("/portfolio.csv")
   }
   it should "specify local path for change data" in {
     load.getString("spark.data_path") should be ("src/main/data/change.csv")
   }
   it should "specify AWS path for change data" in {
-    load.getString("spark.data_path_aws") should startWith ("s3n://")
-    load.getString("spark.data_path_aws") should endWith ("/change.csv")
+    load.getString("spark.data_path_aws") should be ("/change.csv")
   }
   it should "specify local and AWS paths for output directory" in {
     load.getString("spark.output_path") should be ("output")
-    load.getString("spark.output_path_aws") should startWith ("s3n://")
-    load.getString("spark.output_path_aws") should endWith ("/output")
+    load.getString("spark.output_path_aws") should be ("/output")
   }
   it should "specify local and AWS paths for output source" in {
     load.getString("spark.output_src_path") should be ("output/part-00000")
-    load.getString("spark.output_src_path_aws") should startWith ("s3n://")
-    load.getString("spark.output_src_path_aws") should endWith ("/output/part-00000")
+    load.getString("spark.output_src_path_aws") should be ("/output/part-00000")
   }
   it should "specify local and AWS paths for output destination" in {
     load.getString("spark.output_dest_path") should be ("results.txt")
-    load.getString("spark.output_dest_path_aws") should startWith ("s3n://")
-    load.getString("spark.output_dest_path_aws") should endWith ("/results.txt")
+    load.getString("spark.output_dest_path_aws") should be ("/results.txt")
   }
 
   // TESTS 10-14: test Monte Carlo simulation session
