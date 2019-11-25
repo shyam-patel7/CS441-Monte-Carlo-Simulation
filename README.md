@@ -17,7 +17,7 @@ To successfully run this project, access to the [Amazon EMR](https://aws.amazon.
 
 2. Upload the JAR and input files to an [Amazon S3](https://docs.aws.amazon.com/s3) bucket.
 
-3. Open the EMR service and create a new cluster.
+3. Open the Amazon EMR service and create a new cluster.
 
 4. Go to advanced options. Uncheck all but the following services. Then, click the `Next` button.
 
@@ -48,7 +48,7 @@ To successfully run this project, access to the [Amazon EMR](https://aws.amazon.
 
 14. Once completed, access the `results.txt` file from the S3 bucket.
 
-To view these steps visually, please view the [video](https://www.youtube.com).
+To view these steps visually, please view the [video](https://youtu.be/839ZA6zJOWM).
 
 
 ## Tests
@@ -67,7 +67,7 @@ The results of the Spark application can be obtained using the [Amazon S3](https
 ![Amazon S3](https://bitbucket.org/spate54/shyam_patel_hw3/raw/d254c0acb71fba2cc231d35229404ccdb9da0c87/images/s3results.png)
 
 
-The following are the results obtained.
+The following are the results obtained from running the simulation on Amazon EMR.
 ```
 Mean:             $7113.54
 Std deviation:    5335.372
