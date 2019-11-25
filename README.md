@@ -1,11 +1,18 @@
-# HW3: Spark Monte Carlo Simulation
+# HW3: Monte Carlo Simulation
 ### Description: gain experience with the Spark computational model in AWS cloud datacenter.
 This is a homework assignment for CS441 at the University of Illinois at Chicago.
 This project utilizes the open-source [Apache Spark 2.4.4](https://spark.apache.org) cluster-computing framework to program clusters with implicit data parallelism on the [Amazon EMR](https://aws.amazon.com/emr) cloud data platform.
 
 
-## Background
-...
+## Monte Carlo
+The Monte Carlo simulation in this project consists of 10,000 runs and 500 partitions. This is accomplished using the RDD parallelize function. In each run, the following tasks are implemented.
+
+1. The historical stocks data is in the form of percent change of the close price for each day of the companies Google ([GOOGL](https://www.google.com/search?q=GOOGL)), Amazon ([AMZN](https://www.google.com/search?q=AMZN)), Facebook ([FB](https://www.google.com/search?q=FB)), Apple ([AAPL](https://www.google.com/search?q=AAPL)) and Microsoft ([MSFT](https://www.google.com/search?q=MSFT)), ranging from May 2012 to the present. The data is compiled using the `download.py` Python script that uses the [Alpha Vantage API](https://www.alphavantage.co) located in the `src/main/data` directory, the result of which is stored in `src/main/data/change.csv`.
+2. The initial portfolio used in each simulation is consistent and consists of ticker symbols and the funds allocated for each in USD. This is located in `src/main/resources/portfolio.csv`.
+3. In each simulation run in parallel, gains and losses are computed daily for each investment that is part of the portfolio. The subset of values is shuffled to mimic market forces. These gains and losses are recorded in the portfolio.
+4. For each day in which there is a net gain in the portfolio, a decision is made to buy another stock. The stock is selected in random based on its performance for that day. Only stocks that had a net positive change in close price for the day are considered for investment.
+5. For each day in which there is a net loss in the portfolio, a decision is made to possibly sell the stock that had the most negative performance that day. In this case, the investment of the stock that is sold is transferred to the stock that performed most exceptionally that day. If no such stock exists, or it is the same stock that is being considered for sale, then the buying and selling is simply not performed.
+6. This process repeats itself until all the values in the shuffled subset are exhausted.
 
 
 ## Running
@@ -48,7 +55,7 @@ To successfully run this project, access to the [Amazon EMR](https://aws.amazon.
 
 14. Once completed, access the `results.txt` file from the S3 bucket.
 
-To view these steps visually, please view the [video](https://youtu.be/839ZA6zJOWM).
+To view these steps visually, please view this [video](https://youtu.be/839ZA6zJOWM).
 
 
 ## Tests
@@ -56,18 +63,13 @@ This project includes 14 unit tests based on the [ScalaTest](http://www.scalates
 The tests will run automatically when the JAR is assembled. However, if you would like to run them again, simply `cd` into the project root directory and enter the following command: `sbt test`.
 
 
-## Monte Carlo
-The Monte Carlo simulation in this project is comprised of the following.
-
-1. First...
-
 ## Results
 The results of the Spark application can be obtained using the [Amazon S3](https://docs.aws.amazon.com/s3) portal. From the S3 bucket directory, select `results.txt` and click the `Download` button.
 
 ![Amazon S3](https://bitbucket.org/spate54/shyam_patel_hw3/raw/d254c0acb71fba2cc231d35229404ccdb9da0c87/images/s3results.png)
 
 
-The following are the results obtained from running the simulation on Amazon EMR.
+The following are a sample of results obtained from running the simulation on Amazon EMR.
 ```
 Mean:             $7113.54
 Std deviation:    5335.372
@@ -77,5 +79,7 @@ Std deviation:    5335.372
 75th percentile:  $10518.66
 95th percentile:  $18186.97
 ```
+
+As can be observed, the mean investment at the end of the Monte Carlo simulation have increased sharply from the initial $1,250 investment recorded in `portfolio.csv`. The funds vary based on the buying and selling prescribed by the algorithm that takes place through each run of the simulation.
 
 To view images and analysis, see `Documentation.pdf` located in the project root directory.
