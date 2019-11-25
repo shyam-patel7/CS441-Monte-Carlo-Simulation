@@ -1,0 +1,7 @@
+Mean:             $7113.54
+Std deviation:    5335.372
+5th  percentile:  $1572.98
+25th percentile:  $2663.25
+50th percentile:  $5292.40
+75th percentile:  $10518.66
+95th percentile:  $18186.97
