@@ -5,7 +5,7 @@ This project utilizes the open-source [Apache Spark 2.4.4](https://spark.apache.
 
 
 ## Background
-This project aims to predict stock portfolio losses using the Monte Carlo simulation. This Spark application takes advantage of *resilient distributed datasets (RDDs)*, immutable read-only, fault-tolerant distributed collections of objects that are divided into logical partitions and may be computed on different nodes of the cluster. This allows for efficient parallel processing of the data, which would otherwise take much longer to process. The RDDs are created in two ways—either by *referencing* a dataset stored in the [Hadoop Distributed File System (HDFS)](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), as is the case when the application uses the change.csv and portfolio.csv datasets, or by *parallelizing* an existing collection in the driver program, which is what occurs when calling the `runSession` method during each run. When the results RDD is obtained, the mean, standard deviation and 5th, 25th, 50th, 75th and 95th percentiles are computed for the funds values. When the application is run locally, the master is set to run with as many worker threads as logical cores on the machine using the `local[*]` tag.
+This project aims to predict stock portfolio losses using the Monte Carlo simulation. This Spark application takes advantage of *resilient distributed datasets (RDDs)*, immutable read-only, fault-tolerant distributed collections of objects that are divided into logical partitions and may be computed on different nodes of the cluster. This allows for efficient parallel processing of the data, which would otherwise take much longer to process. The RDDs are created in two waysâ€”either by *referencing* a dataset stored in the [Hadoop Distributed File System (HDFS)](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html), as is the case when the application uses the change.csv and portfolio.csv datasets, or by *parallelizing* an existing collection in the driver program, which is what occurs when calling the `runSession` method during each run. When the results RDD is obtained, the mean, standard deviation and 5th, 25th, 50th, 75th and 95th percentiles are computed for the funds values. When the application is run locally, the master is set to run with as many worker threads as logical cores on the machine using the `local[*]` tag.
 
 ## Running
 To successfully run this project, access to the [Amazon EMR](https://aws.amazon.com/emr) cloud data platform, [IntelliJ IDEA](https://www.jetbrains.com/idea), [sbt](https://docs.scala-lang.org/getting-started/sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html) and [Java 8 JDK](https://www.oracle.com/technetwork/java/javase/downloads/index.html) (version 1.8 or higher) are required.
@@ -49,7 +49,7 @@ To successfully run this project, access to the [Amazon EMR](https://aws.amazon.
 
 To view these steps visually, please view the following [video](https://youtu.be/839ZA6zJOWM).
 
-[![YouTube](https://bitbucket.org/spate54/shyam_patel_hw3/raw/cb3024f8a22405f6aa00fd3a46546659d8fcd9e8/images/video.png)](https://youtu.be/839ZA6zJOWM)
+[![YouTube](https://github.com/mashy426/CS441-Monte-Carlo/blob/master/images/video.png)](https://youtu.be/839ZA6zJOWM)
 
 
 ## Tests
@@ -71,7 +71,7 @@ The Monte Carlo simulation in this project consists of 10,000 runs and 500 parti
 ## Results
 The results of the Spark application can be obtained using the [Amazon S3](https://docs.aws.amazon.com/s3) portal. From the S3 bucket directory, select `results.txt` and click the `Download` button.
 
-![Amazon S3](https://bitbucket.org/spate54/shyam_patel_hw3/raw/d254c0acb71fba2cc231d35229404ccdb9da0c87/images/s3results.png)
+![Amazon S3](https://github.com/mashy426/CS441-Monte-Carlo/blob/master/images/s3results.png)
 
 
 The following are a sample of results obtained from running the simulation on Amazon EMR.
